@@ -41,12 +41,12 @@ include_dirs = [
 
 setup(
     name='scikit-glpk',
-    version='0.4.4',
+    version='0.4.5',
     author='Nicholas McKibben',
     author_email='nicholas.bgp@gmail.com',
     url='https://github.com/mckib2/scikit-glpk',
     license='MIT',
-    description='Python linprog interface for GLPK',
+    description='Python linprog interface for GLPK (modified version)',
     long_description=open('README.rst', encoding='utf-8').read(),
     packages=find_packages(),
     keywords='glpk linprog scikit',
