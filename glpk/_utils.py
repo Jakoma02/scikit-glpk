@@ -33,10 +33,8 @@ def _convert_bounds(processed_bounds):
 def _fill_prob(c, A_ub, b_ub, A_eq, b_eq, bounds, integrality, sense, prob_name):
     '''Create and populate GLPK prob struct from linprog definition.'''
 
-    # Housekeeping
-    # TODO: modify to use integrality after https://github.com/mckib2/scipy/pull/28 makes it into scipy master
     lp = _clean_inputs(_LPProblem(c, A_ub, b_ub, A_eq, b_eq, bounds, None))
-    c, A_ub, b_ub, A_eq, b_eq, processed_bounds, _x0 = lp
+    c, A_ub, b_ub, A_eq, b_eq, processed_bounds, _x0, integrality = lp
 
     # Convert to coo_matrices first so that we can concat the already sparce matrices
     A_ub_coo = coo_matrix(A_ub)
