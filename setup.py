@@ -1,15 +1,15 @@
-'''Install scikit-glpk bindings.'''
+"""Install scikit-glpk bindings."""
 
 import pathlib
 from setuptools import find_packages
 from distutils.core import Extension, setup
 from distutils.command.build_ext import build_ext as _build_ext
 
-GLPK_SRC_DIR = pathlib.Path('glpk-4.65/src')
+GLPK_SRC_DIR = pathlib.Path('glpk-5.0/src')
 
 
 def scrape_makefile_list(filename, START_TOKEN, END_TOKEN):
-    '''Grab tags from GLPK makefile.'''
+    """Grab tags from GLPK makefile."""
     with open(str(filename), 'r', encoding='utf-8') as f:
         _contents = f.read()
         sidx = _contents.find(START_TOKEN)
@@ -19,10 +19,11 @@ def scrape_makefile_list(filename, START_TOKEN, END_TOKEN):
 
 
 class build_ext(_build_ext):
-    '''Override get_export_symbols to provide them for Windows DLL.'''
+    """Override get_export_symbols to provide them for Windows DLL."""
     def get_export_symbols(self, ext):
-        '''Only for generating Windows DLL.'''
-        def_file = GLPK_SRC_DIR / '../w64/glpk_4_65.def'
+        """Only for generating Windows DLL."""
+        # TODO: use w32 variant if win32 support needed
+        def_file = GLPK_SRC_DIR / '../w64/glpk_5_0.def'
         return scrape_makefile_list(def_file, 'EXPORTS\n', ';; end of file ;;')
 
 
@@ -40,8 +41,8 @@ include_dirs = [
 
 
 setup(
-    name='scikit-glpk',
-    version='0.4.5',
+    name='scikit-glpk-jakoma02',
+    version='0.5.1',
     author='Nicholas McKibben',
     author_email='nicholas.bgp@gmail.com',
     url='https://github.com/mckib2/scikit-glpk',
@@ -51,11 +52,11 @@ setup(
     packages=find_packages(),
     keywords='glpk linprog scikit',
     install_requires=open('requirements.txt', encoding='utf-8').read().split(),
-    python_requires='>=3.5',
+    python_requires='>=3.8',
 
     ext_modules=[
         Extension(
-            'glpk4_65',
+            'glpk5_0',
             sources=sources,
             include_dirs=include_dirs,
             language='c',
