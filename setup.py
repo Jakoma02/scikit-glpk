@@ -42,7 +42,7 @@ include_dirs = [
 
 setup(
     name='scikit-glpk-jakoma02',
-    version='0.5.1',
+    version='0.5.2',
     author='Nicholas McKibben',
     author_email='nicholas.bgp@gmail.com',
     url='https://github.com/mckib2/scikit-glpk',
